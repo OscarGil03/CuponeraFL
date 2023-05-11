@@ -11,11 +11,11 @@ class AppTheme {
 
   //TODO: Revisar si la webada esta es util
   
-  // static TextStyle buttonTextAccept = TextStyle(
-  //     fontSize: 20,
-  //     // fontStyle: FontStyle.italic,
-  //     color: accept,
-  //     decoration: TextDecoration.underline);
+  static TextStyle buttonTextAccept = TextStyle(
+      fontSize: 18,
+      // fontStyle: FontStyle.italic,
+      color: accept,
+      decoration: TextDecoration.underline);
 
   //Estilo Global de la App
   static ThemeData lightTheme = ThemeData.light().copyWith(

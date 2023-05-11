@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: CircleAvatar(
                       maxRadius: 80,
                       backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage('https://i.ibb.co/37qHwFr/Logo-Saxevil-2.png'),
+                      backgroundImage: AssetImage('assets/saxevil-logo.png'),
                       ),
                     ),
           
@@ -72,10 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: 'Introduzca su contraseña',
                       helperText: 'Letra y simbolos',
                       obscureText: true,
-                      keyboardType: TextInputType.emailAddress),
+                      keyboardType: TextInputType.name
+                      ),
           
                   const SizedBox(height: 30),
-          
+
+                  //
                   const Text('o', style: TextStyle(fontSize: 20),),
                   const Text('Ingresa con',style: TextStyle(fontSize: 20),),
                   
