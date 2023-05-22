@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "498775236147",
+    "project_id": "qponera-39e61",
+    "storage_bucket": "qponera-39e61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498775236147:android:5449a6d4ebf4b6e253cd46",
+        "android_client_info": {
+          "package_name": "com.example.cuponera_fl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498775236147-eo695p4b11e3oeqkbq96ckl7r0do81nr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAwkyg149J-SIqN2L4Sgfp4ppklE9HADg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498775236147-eo695p4b11e3oeqkbq96ckl7r0do81nr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "498775236147-rl4aksqjhug97om24ecfvleag1atjod9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cuponeraFl"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
