@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
-  final String? hintText;
-  final String? labelText;
-  final String? helperText;
-  final IconData? icon;
-  final IconData? prefixIcon;
-  final IconData? suffixIcon;
-  final TextInputType? keyboardType;
-  final TextCapitalization textCapitalization;
-  final bool obscureText;
+  
+final String? hintText;
+final String? labelText;
+final String? helperText;
+final IconData? icon;
+final IconData? prefixIcon;
+final IconData? suffixIcon;
+final TextInputType? keyboardType;
+final TextCapitalization textCapitalization;
+final bool obscureText;
 
 /* Comentario util pa cuando queramos guardar los campos
 
@@ -27,23 +28,22 @@ Si quisieramos recibir la pura estructura, podriamos definir los campos comp
 un String vacio ({ 'nombre': '' })
 */
 
-  final String formProperty;
-  final Map<String, String> formValues;
+final String formProperty;
+final Map<String, String> formValues;
 
   const CustomInputField({
-    super.key,
-    this.hintText,
-    this.labelText,
-    this.helperText,
-    this.icon,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.keyboardType,
-    this.obscureText = false,
-    this.textCapitalization = TextCapitalization.words,
-    required this.formProperty,
-    required this.formValues,
-    required TextEditingController controller,
+    super.key, 
+    this.hintText, 
+    this.labelText, 
+    this.helperText, 
+    this.icon, 
+    this.prefixIcon, 
+    this.suffixIcon, 
+    this.keyboardType, 
+    this.obscureText = false, 
+    this.textCapitalization = TextCapitalization.words, 
+    required this.formProperty, 
+    required this.formValues, 
   });
 
   @override
@@ -53,7 +53,7 @@ un String vacio ({ 'nombre': '' })
       textCapitalization: textCapitalization,
       keyboardType: keyboardType,
       obscureText: obscureText,
-      /* Aqui se iguala el valor de value (Que es el contenido del FormField)
+       /* Aqui se iguala el valor de value (Que es el contenido del FormField)
         al valor de que tenga el Mapa (formValues) en la propiedad
         que elijamos (formProperty). El Mapa actualizado es enviado
         de regreso a la pantalla inputs_screen.dart.
@@ -62,12 +62,10 @@ un String vacio ({ 'nombre': '' })
         
         Map<String, String>['nombre'] = value;
         */
-      onChanged: (value) => formValues[formProperty] = value,
-      validator: (value) {
-        if (value == null) return 'Este campo es requerido';
-        return value.length < 3
-            ? 'El campo tiene que tener por lo menos 6 letras'
-            : null;
+      onChanged: (value)=> formValues[formProperty] = value,
+      validator: (value){
+        if( value == null)return 'Este campo es requerido';
+        return value.length < 3 ? 'El campo tiene que tener por lo menos 6 letras': null;
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
@@ -77,7 +75,7 @@ un String vacio ({ 'nombre': '' })
         counterText: 'Te faltan caracteres',
         prefixIcon: prefixIcon == null ? null : Icon(prefixIcon),
         suffixIcon: suffixIcon == null ? null : Icon(suffixIcon),
-        icon: icon == null ? null : Icon(icon),
+        icon: icon == null? null : Icon(icon),
       ),
     );
   }

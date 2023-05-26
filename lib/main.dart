@@ -1,19 +1,16 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cuponera_fl/routes/routes.dart';
 import 'package:cuponera_fl/themes/themes.dart';
 
-void main() async {
+
+void main() {
   /* Estas lineas utilizan el paquete Services de flutter
   para impedir que se gire el dispositivo
   */
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]
   );
   runApp(const MyApp());
 }
