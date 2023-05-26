@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAttgx6_72rY44IjRSugh-_Oge1XM-_AQI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>281185243336</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.cuponeraFl</string>
+	<key>PROJECT_ID</key>
+	<string>qponerafire-5ad91</string>
+	<key>STORAGE_BUCKET</key>
+	<string>qponerafire-5ad91.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:281185243336:ios:cdca1ef5a8e677fd4455fd</string>
+</dict>
+</plist>

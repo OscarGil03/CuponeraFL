@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "281185243336",
+    "project_id": "qponerafire-5ad91",
+    "storage_bucket": "qponerafire-5ad91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281185243336:android:303e588e22924c224455fd",
+        "android_client_info": {
+          "package_name": "com.example.cuponera_fl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASGqgo9q2diNwwxF7hp8AGIwJC0lAKBg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
