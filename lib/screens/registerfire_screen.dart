@@ -1,31 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cuponera_fl/themes/themes.dart';
+import 'package:cuponera_fl/themes/app_theme.dart';
 
-class LoginFireScreen extends StatefulWidget {
-  const LoginFireScreen({Key? key}) : super(key: key);
+class RegisterFireScreen extends StatefulWidget {
+  const RegisterFireScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginFireScreen> createState() => _LoginFireScreenState();
+  State<RegisterFireScreen> createState() => _RegisterFireScreenState();
 }
 
-class _LoginFireScreenState extends State<LoginFireScreen> {
-  //Controladores para los campos de texto
-
+class _RegisterFireScreenState extends State<RegisterFireScreen> {
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  //Utilizado en el metodo screenChange
+  bool _screenHandler = false;
 
-  //Metodo de inicio de sesion
-  /*Esperaba a la instacia de FirebaseAuth y su metodo de inicion con correo y contraseña.
-    Una vez se recibe respuesta, se le envian los controladores de los campos de correo y
-    contraseña.
-  */
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _controllerEmail.text.trim(),
-      password: _controllerPassword.text.trim(),
-    );
+  //Cambia la pantalla una vez que la informacion de los campos es valida
+  screenChange() {
+    _screenHandler ? Navigator.popAndPushNamed(context, 'start') : null;
+  }
+
+  Future signUp() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _controllerEmail.text.trim(),
+        password: _controllerPassword.text.trim(),
+      );
+
+      /*Si la informacion de los campos es correcta la variable privdad _screenHandler se vuelve
+      verdadera y se llama el metodo para cambiar pantalla*/
+      _screenHandler = true;
+      screenChange();
+    } catch (signUpError) {
+      if (signUpError is PlatformException) {
+        if (signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+          print('El usuario ${_controllerEmail.text} ya existe');
+        }
+        if (signUpError.code == 'ERROR_WEAK_PASSWORD') {
+          print('La contraseña es muy debil');
+        }
+        if (signUpError.code == 'ERROR_INVALID_EMAIL') {
+          print('El usuario ${_controllerEmail.text} ya existe');
+        }
+      }
+    }
   }
 
   @override
@@ -39,7 +58,7 @@ class _LoginFireScreenState extends State<LoginFireScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Prueba de Login Fire'),
+        title: const Text('Prueba de Register Fire'),
       ),
       body: GestureDetector(
         /*Permite quitar el foco de los campos de texto al presionar en cualquier lugar
@@ -57,24 +76,21 @@ class _LoginFireScreenState extends State<LoginFireScreen> {
             child: Column(
               children: [
                 //Logo Saxevilito
-
                 const CircleAvatar(
                   maxRadius: 80,
                   backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage('assets/saxevil-logo.png'),
                 ),
+                const SizedBox(height: 20),
 
                 //Mensaje
 
-                const SizedBox(height: 20),
-
                 const Text(
-                  'INICIA SESION',
+                  'REGISTRATE',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
 
                 const SizedBox(height: 40),
-
                 //Input Correo
 
                 TextField(
@@ -104,39 +120,16 @@ class _LoginFireScreenState extends State<LoginFireScreen> {
                 //Boton enviar
 
                 ElevatedButton(
-                  onPressed: signIn,
+                  onPressed: () {
+                    signUp();
+                  },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 30,
                       vertical: 15,
                     ),
-                    child: Text('Iniciar Sesion'),
+                    child: Text('Registrarse'),
                   ),
-                ),
-
-                //-------------------Temporal----------------------
-                //O ingresa con...
-                const SizedBox(height: 20),
-
-                Text(
-                  'O ingresa con',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.primary,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.mail, size: 30)),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.facebook, size: 30)),
-                  ],
                 ),
               ],
             ),

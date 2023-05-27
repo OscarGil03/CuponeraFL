@@ -12,15 +12,20 @@ class AppRoutes {
         name: 'Pantalla de Home',
         screen: const HomeScreen()),
     RouteOption(
-        route: 'login',
-        icon: Icons.home,
-        name: 'Pantalla de Login',
-        screen: const LoginScreen()),
-    RouteOption(
         route: 'loginfire',
         icon: Icons.home,
         name: 'Pantalla de LoginFire',
         screen: const LoginFireScreen()),
+    RouteOption(
+        route: 'registerfire',
+        icon: Icons.home,
+        name: 'Pantalla de RegisterFire',
+        screen: const RegisterFireScreen()),
+    RouteOption(
+        route: 'check',
+        icon: Icons.play_arrow_outlined,
+        name: 'Check Login',
+        screen: const CheckScreen()),
     RouteOption(
         route: 'start',
         icon: Icons.play_arrow_outlined,
@@ -31,11 +36,6 @@ class AppRoutes {
         icon: Icons.play_arrow_outlined,
         name: 'Pantalla de Perfil',
         screen: const ProfileScreen()),
-    RouteOption(
-        route: 'check',
-        icon: Icons.play_arrow_outlined,
-        name: 'Check Login',
-        screen: const CheckScreen()),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {

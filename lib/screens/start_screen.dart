@@ -27,7 +27,10 @@ class StartScreen extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CustomBottomContainer(destinationRoute: 'check'),
+                  CustomBottomContainer(
+                    loginDestinationRoute: 'check',
+                    registerDestinationRoute: 'registerfire',
+                  ),
                 ],
               )
             ],
