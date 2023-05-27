@@ -13,21 +13,26 @@ class RegisterFireScreen extends StatefulWidget {
 class _RegisterFireScreenState extends State<RegisterFireScreen> {
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerPasswordConfirm =
+      TextEditingController();
   //Utilizado en el metodo screenChange
   bool _screenHandler = false;
 
   //Cambia la pantalla una vez que la informacion de los campos es valida
   screenChange() {
-    _screenHandler ? Navigator.popAndPushNamed(context, 'start') : null;
+    _screenHandler ? Navigator.popAndPushNamed(context, 'home') : null;
   }
 
   Future signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _controllerEmail.text.trim(),
-        password: _controllerPassword.text.trim(),
-      );
-
+      if (_controllerPassword.text == _controllerPasswordConfirm.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _controllerEmail.text.trim(),
+          password: _controllerPassword.text.trim(),
+        );
+      } else {
+        return print('Las contraseñas no son iguales');
+      }
       /*Si la informacion de los campos es correcta la variable privdad _screenHandler se vuelve
       verdadera y se llama el metodo para cambiar pantalla*/
       _screenHandler = true;
@@ -117,7 +122,21 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
 
                 const SizedBox(height: 20),
 
-                //Boton enviar
+                //Input Contraseña
+
+                TextField(
+                  controller: _controllerPasswordConfirm,
+                  cursorColor: AppTheme.primary,
+                  keyboardType: TextInputType.name,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    hintText: 'Confirmar contraseña',
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                //Boton enviar registro de usuario
 
                 ElevatedButton(
                   onPressed: () {
