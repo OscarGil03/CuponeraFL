@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,8 +14,10 @@ class RegisterFireScreen extends StatefulWidget {
 class _RegisterFireScreenState extends State<RegisterFireScreen> {
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
-  final TextEditingController _controllerPasswordConfirm =
-      TextEditingController();
+  final TextEditingController _controllerPassC = TextEditingController();
+  final TextEditingController _controllerNombre = TextEditingController();
+  final TextEditingController _controllerApellido = TextEditingController();
+  final TextEditingController _controllerEdad = TextEditingController();
   //Utilizado en el metodo screenChange
   bool _screenHandler = false;
 
@@ -25,32 +28,73 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
 
   Future signUp() async {
     try {
-      if (_controllerPassword.text == _controllerPasswordConfirm.text) {
+      if (_controllerPassword.text == _controllerPassC.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _controllerEmail.text.trim(),
           password: _controllerPassword.text.trim(),
         );
+
+        //Se agregan los datos del usuario
+        addUserInfo(
+          _controllerNombre.text.trim(),
+          _controllerApellido.text.trim(),
+          _controllerEmail.text.trim(),
+          int.parse(_controllerEdad.text.trim()),
+        );
       } else {
         return print('Las contraseñas no son iguales');
       }
+      //TODO: Cambiar esta webada para que sea como en el archivo PASSWORDFIRE.dart
       /*Si la informacion de los campos es correcta la variable privdad _screenHandler se vuelve
       verdadera y se llama el metodo para cambiar pantalla*/
       _screenHandler = true;
       screenChange();
-    } catch (signUpError) {
-      if (signUpError is PlatformException) {
-        if (signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-          print('El usuario ${_controllerEmail.text} ya existe');
-        }
-        if (signUpError.code == 'ERROR_WEAK_PASSWORD') {
-          print('La contraseña es muy debil');
-        }
-        if (signUpError.code == 'ERROR_INVALID_EMAIL') {
-          print('El usuario ${_controllerEmail.text} ya existe');
-        }
-      }
+    } on FirebaseAuthException catch (signUpError) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            // content: Text(restartError.message.toString()),
+            content: Text(signUpError.message.toString()),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Ok'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
+
+  Future addUserInfo(
+      String nombre, String apellido, String email, int edad) async {
+    try {
+      await FirebaseFirestore.instance.collection('usuarios').add({
+        'nombres': nombre,
+        'apellidos': apellido,
+        'edad': edad,
+        'email': email,
+      });
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
+  //if (signUpError is PlatformException) {
+  //   if (signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+  //     print('El usuario ${_controllerEmail.text} ya existe');
+  //   }
+  //   if (signUpError.code == 'ERROR_WEAK_PASSWORD') {
+  //     print('La contraseña es muy debil');
+  //   }
+  //   if (signUpError.code == 'ERROR_INVALID_EMAIL') {
+  //     print('El usuario ${_controllerEmail.text} ya existe');
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -96,6 +140,41 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
                 ),
 
                 const SizedBox(height: 40),
+                //Input Nombre
+
+                TextField(
+                  controller: _controllerNombre,
+                  cursorColor: AppTheme.primary,
+                  keyboardType: TextInputType.name,
+                  decoration: const InputDecoration(
+                    hintText: 'Nombres',
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+                //Input Apellido
+
+                TextField(
+                  controller: _controllerApellido,
+                  cursorColor: AppTheme.primary,
+                  keyboardType: TextInputType.name,
+                  decoration: const InputDecoration(
+                    hintText: 'Apellidos',
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+                //Input Edad
+                TextField(
+                  controller: _controllerEdad,
+                  cursorColor: AppTheme.primary,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    hintText: 'Edad en años',
+                  ),
+                ),
+
+                const SizedBox(height: 15),
                 //Input Correo
 
                 TextField(
@@ -125,7 +204,7 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
                 //Input Contraseña
 
                 TextField(
-                  controller: _controllerPasswordConfirm,
+                  controller: _controllerPassC,
                   cursorColor: AppTheme.primary,
                   keyboardType: TextInputType.name,
                   obscureText: true,
@@ -150,6 +229,8 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
                     child: Text('Registrarse'),
                   ),
                 ),
+
+                const SizedBox(height: 50),
               ],
             ),
           ),

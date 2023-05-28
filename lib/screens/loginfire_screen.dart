@@ -22,10 +22,30 @@ class _LoginFireScreenState extends State<LoginFireScreen> {
     contraseña.
   */
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _controllerEmail.text.trim(),
-      password: _controllerPassword.text.trim(),
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _controllerEmail.text.trim(),
+        password: _controllerPassword.text.trim(),
+      );
+    } on FirebaseAuthException catch (exception) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            // content: Text(restartError.message.toString()),
+            content: Text(exception.message.toString()),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Ok'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -99,8 +119,29 @@ class _LoginFireScreenState extends State<LoginFireScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
 
+                //Olvidaste tu contraseña?
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Olvidaste tu contraseña?',
+                      style: TextStyle(color: AppTheme.primary, fontSize: 16),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'passfire');
+                      },
+                      child: Text('Restablecer contraseña',
+                          style: TextStyle(
+                              color: AppTheme.accept,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline)),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 10),
                 //Boton enviar
 
                 ElevatedButton(

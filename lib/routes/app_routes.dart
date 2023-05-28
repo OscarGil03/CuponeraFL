@@ -22,6 +22,11 @@ class AppRoutes {
         name: 'Pantalla de RegisterFire',
         screen: const RegisterFireScreen()),
     RouteOption(
+        route: 'passfire',
+        icon: Icons.home,
+        name: 'Pantalla de PasswordFire',
+        screen: const PasswordFireScreen()),
+    RouteOption(
         route: 'check',
         icon: Icons.play_arrow_outlined,
         name: 'Check Login',
