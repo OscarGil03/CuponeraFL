@@ -41,6 +41,11 @@ class AppRoutes {
         icon: Icons.play_arrow_outlined,
         name: 'Pantalla de Perfil',
         screen: const ProfileScreen()),
+    RouteOption(
+        route: 'profilefire',
+        icon: Icons.play_arrow_outlined,
+        name: 'Profile Fire',
+        screen: const ProfileFireScreen()),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {

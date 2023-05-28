@@ -27,13 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Pantalla de Home'),
-          // leading: Container(
-          //   margin: const EdgeInsets.only(left: 5),
-          //   child: const CircleAvatar(
-          //     backgroundColor: Colors.transparent,
-          //     backgroundImage: NetworkImage('https://i.ibb.co/37qHwFr/Logo-Saxevil-2.png'),
-          //   ),
-          // ),
           actions: [
             Container(
               margin: const EdgeInsets.only(right: 5),
@@ -45,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       milliseconds: 300,
                     ),
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const ProfileScreen(),
+                        const ProfileFireScreen(),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, child) {
                       const begin = Offset(1, 0);

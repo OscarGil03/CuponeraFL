@@ -146,6 +146,7 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
                   controller: _controllerNombre,
                   cursorColor: AppTheme.primary,
                   keyboardType: TextInputType.name,
+                  textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     hintText: 'Nombres',
                   ),
@@ -157,6 +158,7 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
                 TextField(
                   controller: _controllerApellido,
                   cursorColor: AppTheme.primary,
+                  textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
                     hintText: 'Apellidos',
