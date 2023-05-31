@@ -48,8 +48,8 @@ class CustomProfileCard extends StatelessWidget {
               //Imagen de usuario
               const CircleAvatar(
                 maxRadius: 30,
-                backgroundImage:
-                    NetworkImage('https://i.ibb.co/NshW15G/image.png'),
+                backgroundImage: NetworkImage(
+                    'https://img.freepik.com/iconos-gratis/usuario_318-159711.jpg'),
               ),
             ],
           ),

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class CustomDrawerOption extends StatelessWidget {
+class DrawerOption extends StatelessWidget {
   final String optionName;
   final IconData optionIcon;
+  final void Function()? onTap;
 
-  const CustomDrawerOption({
+  const DrawerOption({
     super.key,
     required this.optionName,
     required this.optionIcon,
+    this.onTap,
   });
 
   @override
@@ -15,7 +17,7 @@ class CustomDrawerOption extends StatelessWidget {
     return ListTile(
       title: Text(optionName),
       trailing: Icon(optionIcon),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }

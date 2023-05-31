@@ -29,20 +29,30 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
   Future signUp() async {
     try {
       if (_controllerPassword.text == _controllerPassC.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _controllerEmail.text.trim(),
           password: _controllerPassword.text.trim(),
         );
 
-        //Se agregan los datos del usuario
-        addUserInfo(
-          _controllerNombre.text.trim(),
-          _controllerApellido.text.trim(),
-          _controllerEmail.text.trim(),
-          int.parse(_controllerEdad.text.trim()),
-        );
+        await FirebaseFirestore.instance
+            .collection('usuarios')
+            .doc(userCredential.user!.email)
+            .set({
+          'nombres': _controllerNombre.text.trim(),
+          'apellidos': _controllerApellido.text.trim(),
+          'email': _controllerEmail.text.trim(),
+          'edad': _controllerEdad.text.trim(),
+          'perfil':
+              'https://img.freepik.com/iconos-gratis/usuario_318-159711.jpg',
+        });
       } else {
-        return print('Las contraseñas no son iguales');
+        return showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            title: Text('Las contraseñas no son iguales'),
+          ),
+        );
       }
       //TODO: Cambiar esta webada para que sea como en el archivo PASSWORDFIRE.dart
       /*Si la informacion de los campos es correcta la variable privdad _screenHandler se vuelve
@@ -69,32 +79,6 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
       );
     }
   }
-
-  Future addUserInfo(
-      String nombre, String apellido, String email, int edad) async {
-    try {
-      await FirebaseFirestore.instance.collection('usuarios').add({
-        'nombres': nombre,
-        'apellidos': apellido,
-        'edad': edad,
-        'email': email,
-      });
-    } on FirebaseException catch (e) {
-      print(e);
-    }
-  }
-
-  //if (signUpError is PlatformException) {
-  //   if (signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-  //     print('El usuario ${_controllerEmail.text} ya existe');
-  //   }
-  //   if (signUpError.code == 'ERROR_WEAK_PASSWORD') {
-  //     print('La contraseña es muy debil');
-  //   }
-  //   if (signUpError.code == 'ERROR_INVALID_EMAIL') {
-  //     print('El usuario ${_controllerEmail.text} ya existe');
-  //   }
-  // }
 
   @override
   void dispose() {

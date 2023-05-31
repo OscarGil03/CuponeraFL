@@ -12,7 +12,7 @@ class ProfileFireScreen extends StatefulWidget {
 }
 
 class _ProfileFireScreenState extends State<ProfileFireScreen> {
-  static final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser!;
 
   // Document IDS
   List<String> docIDs = [];
