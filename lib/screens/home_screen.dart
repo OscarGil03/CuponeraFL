@@ -20,12 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   //Coleccion de datos a usar en firestore para los usuarios
   final userCollection = FirebaseFirestore.instance.collection('usuarios');
 
-  //TODO: MOVER controladores de negocios A UN ARCHIVO APARTE
-  //Controladores para negocios
-  final TextEditingController _nombreNegController = TextEditingController();
-  final TextEditingController _descNegController = TextEditingController();
-  final TextEditingController _imgNegController = TextEditingController();
-
   //Metodo para obtener los negocios de la BD en Firestore
   Future<List?> getNegocio() async {
     try {
@@ -44,34 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return null;
   }
 
-  //Interfaz para añadir negocio
-  //TODO: MOVER addNegocios A UN ARCHIVO APARTE
-  //Metodo para añadir negocios a la BD en Firestore
-  Future<void> addNegocio(String desc, String imageUrl, String name) async {
-    try {
-      await FirebaseFirestore.instance.collection('negocios').add({
-        'desc': desc,
-        'imageUrl': imageUrl,
-        'name': name,
-      });
-    } on FirebaseException catch (e) {
-      print(e);
-    }
+  //Metodo para refrescar la pantalla
+  Future<void> refreshScreen() async {
+    await Future.delayed(const Duration(seconds: 2));
+    //Probablemente existan mejores manera de hacerlo pero lo que hace este metodo es volver a dibujar
+    //la pantalla
+    setState(() {});
   }
-
-  // Future addUserInfo(
-  //     String nombre, String apellido, String email, int edad) async {
-  //   try {
-  //     await FirebaseFirestore.instance.collection('usuarios').add({
-  //       'nombres': nombre,
-  //       'apellidos': apellido,
-  //       'edad': edad,
-  //       'email': email,
-  //     });
-  //   } on FirebaseException catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -121,39 +94,59 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Pantalla de Home'),
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder(
-              future: getNegocio(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(top: 15),
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomCardTipo2(
-                          name: snapshot.data?[index]['name'],
-                          desc: snapshot.data?[index]['desc'],
-                          imageUrl: snapshot.data?[index]['imageUrl'],
-                          screen: ProfileScreen(),
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: AppTheme.terciary,
-                    ),
-                  );
-                }
-              },
+      body: RefreshIndicator(
+        color: AppTheme.terciary,
+        onRefresh: () => refreshScreen(),
+        child: Column(
+          children: [
+            Expanded(
+              child: FutureBuilder(
+                future: getNegocio(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        String name = snapshot.data?[index]['name'];
+                        String desc = snapshot.data?[index]['desc'];
+                        String imageUrl = snapshot.data?[index]['imageUrl'];
+                        return Container(
+                          margin: const EdgeInsets.only(top: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: CustomCardTipo2(
+                            name: name,
+                            desc: desc,
+                            imageUrl: imageUrl,
+                            screen: NegocioScreen(
+                              negName: snapshot.data?[index]['name'],
+                              negDesc: snapshot.data?[index]['desc'],
+                              negImg: snapshot.data?[index]['imageUrl'],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppTheme.terciary,
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-        ],
+            // ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => NegocioScreen(hola: 'Hola buena'),
+            //           ));
+            //     },
+            //     child: const Text('picale'))
+          ],
+        ),
       ),
       // body: ListView(
       //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

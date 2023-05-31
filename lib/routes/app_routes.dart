@@ -41,6 +41,11 @@ class AppRoutes {
         icon: Icons.play_arrow_outlined,
         name: 'Pantalla de Perfil',
         screen: const ProfileScreen()),
+    // RouteOption(
+    //     route: 'negocio',
+    //     icon: Icons.play_arrow_outlined,
+    //     name: 'Pantalla de Negocio',
+    //     screen: NegocioScreen()),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {

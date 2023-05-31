@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cuponera_fl/routes/routes.dart';
+// import 'package:cuponera_fl/routes/routes.dart';
 import 'package:cuponera_fl/themes/themes.dart';
 import 'package:cuponera_fl/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,7 +38,8 @@ class CustomDrawer extends StatelessWidget {
             //Opcion de aceptar
             TextButton(
                 onPressed: () async {
-                  Navigator.pop(context);
+                  //Viaja a la pantalla de inicio y cierra la sesion de FirebaseAuth
+                  Navigator.popAndPushNamed(context, 'start');
                   await FirebaseAuth.instance.signOut();
                 },
                 child: Text(

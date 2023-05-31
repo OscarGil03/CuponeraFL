@@ -69,8 +69,12 @@ class CustomCardTipo2 extends StatelessWidget {
                 tileColor: AppTheme.terciary,
                 // onTap: () {},
                 title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name!, style: TextStyle(color: AppTheme.primary)),
+                    Text(name!,
+                        style: TextStyle(
+                            color: AppTheme.primary,
+                            fontWeight: FontWeight.bold)),
                     if (desc != null)
                       Text(desc!, style: TextStyle(color: AppTheme.primary)),
                   ],

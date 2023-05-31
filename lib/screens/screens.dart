@@ -1,3 +1,4 @@
+export 'package:cuponera_fl/screens/negocio_screen.dart';
 export 'package:cuponera_fl/screens/addneg_screen.dart';
 export 'package:cuponera_fl/screens/passwordfire_screen.dart';
 export 'package:cuponera_fl/screens/check_login.dart';

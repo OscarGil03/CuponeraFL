@@ -88,6 +88,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(25.0),
                       child: Center(
@@ -138,17 +141,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-
-                //Correo electronico
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Correo electronico: ${currentUser.email}',
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 20,
+                //DIVIDER
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Divider(
+                    color: AppTheme.primary,
+                    height: 10,
+                    thickness: 2,
+                  ),
                 ),
 
                 //Nombre de Usuario

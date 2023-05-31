@@ -59,7 +59,8 @@ class _LoginFireScreenState extends State<LoginFireScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Prueba de Login Fire'),
+        title: const Text('Pantalla de Login'),
+        centerTitle: true,
       ),
       body: GestureDetector(
         /*Permite quitar el foco de los campos de texto al presionar en cualquier lugar

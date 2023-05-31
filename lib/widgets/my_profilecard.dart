@@ -15,6 +15,9 @@ class MyProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       margin: const EdgeInsets.only(right: 15, left: 15, top: 15),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -26,7 +29,10 @@ class MyProfileCard extends StatelessWidget {
               children: [
                 Text(
                   '$nombreSeccion: ',
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
                 ),
                 IconButton(
                     onPressed: onPressed,
@@ -37,7 +43,10 @@ class MyProfileCard extends StatelessWidget {
                     ))
               ],
             ),
-            Text(textoSeccion),
+            Text(
+              textoSeccion,
+              style: TextStyle(fontSize: 16, color: AppTheme.primary),
+            ),
             const SizedBox(
               height: 20,
             ),
