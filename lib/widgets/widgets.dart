@@ -1,3 +1,4 @@
+export 'package:cuponera_fl/widgets/custom_text_field.dart';
 export 'package:cuponera_fl/widgets/my_profilecard.dart';
 export 'package:cuponera_fl/widgets/drawer_option.dart';
 export 'package:cuponera_fl/widgets/getfire_user_name.dart';

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cuponera_fl/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -126,77 +127,63 @@ class _RegisterFireScreenState extends State<RegisterFireScreen> {
                 const SizedBox(height: 40),
                 //Input Nombre
 
-                TextField(
-                  controller: _controllerNombre,
-                  cursorColor: AppTheme.primary,
-                  keyboardType: TextInputType.name,
+                CustomTextField(
+                  hintText: 'Nombres',
                   textCapitalization: TextCapitalization.words,
-                  decoration: const InputDecoration(
-                    hintText: 'Nombres',
-                  ),
+                  controller: _controllerNombre,
+                  keyboardType: TextInputType.name,
+                  obscureText: false,
                 ),
 
                 const SizedBox(height: 15),
                 //Input Apellido
-
-                TextField(
-                  controller: _controllerApellido,
-                  cursorColor: AppTheme.primary,
+                CustomTextField(
+                  hintText: 'Apellidos',
                   textCapitalization: TextCapitalization.words,
+                  controller: _controllerApellido,
                   keyboardType: TextInputType.name,
-                  decoration: const InputDecoration(
-                    hintText: 'Apellidos',
-                  ),
+                  obscureText: false,
                 ),
 
                 const SizedBox(height: 15),
                 //Input Edad
-                TextField(
+                CustomTextField(
+                  hintText: 'Edad en años',
+                  textCapitalization: TextCapitalization.none,
                   controller: _controllerEdad,
-                  cursorColor: AppTheme.primary,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    hintText: 'Edad en años',
-                  ),
+                  obscureText: false,
                 ),
 
                 const SizedBox(height: 15),
                 //Input Correo
-
-                TextField(
+                CustomTextField(
+                  hintText: 'Correo Electronico',
+                  textCapitalization: TextCapitalization.none,
                   controller: _controllerEmail,
-                  cursorColor: AppTheme.primary,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    hintText: 'Correo Electronico',
-                  ),
+                  obscureText: false,
                 ),
 
                 const SizedBox(height: 15),
                 //Input Contraseña
-
-                TextField(
+                CustomTextField(
+                  hintText: 'Contraseña',
+                  textCapitalization: TextCapitalization.none,
                   controller: _controllerPassword,
-                  cursorColor: AppTheme.primary,
                   keyboardType: TextInputType.name,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    hintText: 'Contraseña',
-                  ),
                 ),
 
                 const SizedBox(height: 20),
 
                 //Input Contraseña
-
-                TextField(
+                CustomTextField(
+                  hintText: 'Confirmar contraseña',
+                  textCapitalization: TextCapitalization.none,
                   controller: _controllerPassC,
-                  cursorColor: AppTheme.primary,
                   keyboardType: TextInputType.name,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    hintText: 'Confirmar contraseña',
-                  ),
                 ),
 
                 const SizedBox(height: 20),

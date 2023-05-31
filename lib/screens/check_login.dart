@@ -17,9 +17,6 @@ class CheckScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Check User'),
-      ),
       body: StreamBuilder<User?>(
         builder: (context, snapshot) {
           //Podemos cambiarlo a operador ternario
